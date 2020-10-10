@@ -3,18 +3,46 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 
+<div class="d-flex justify-content-center"><h2>LOGO HERE</h2></div>
+  <br>
+<div class="container d-flex justify-content-center">
+  <div class="d-flex justify-content-center"><h2>SIGNUP</h2></div> <br>
+    <div class="form-group border mr-3 ml-3">
+      <div class="card-title">
+        
+        <div class="title" *ngIf="loggedIn===true"><h2>Welcome <span *ngIf="loggedIn===true">{{user.firstName}} {{user.lastName}} </span></h2></div>
+        <div>
+          <button class="ml-2 btn btn-primary" type="button" (click)="signInWithFB()" *ngIf="loggedIn===false" mat-flat-button color="primary">Sign In With Facebook <img src="https://img.icons8.com/doodle/20/000000/facebook-new.png"/></button>
+          <button class="btn btn-primary" type="button" (click)="signOut()" *ngIf="loggedIn===true" mat-flat-button color="primary">Sign Out From Facebook <img src="https://img.icons8.com/doodle/20/000000/facebook-new.png"/> </button>
+        </div>
+        <br>
+        <form *ngIf="loggedIn===false">
+          <div class="form-group">
+            <input type="text" class="form-control" id="First Name"  placeholder="First Name">
+          </div>
 
-<div class="container">
-  <div class="example-card">
-    <div class="card-header">
-      <div class="title"><h2>Welcome <span *ngIf="loggedIn===true">{{user.firstName}} {{user.lastName}}, </span> to Angular 8 Application</h2></div>
-      <div>
-        <button type="button" (click)="signInWithFB()" *ngIf="loggedIn===false" mat-flat-button color="primary">Sign In With Facebook</button>
-        <button type="button" (click)="signOut()" *ngIf="loggedIn===true" mat-flat-button color="primary">Sign Out From Facebook</button>
+          <div class="form-group">
+            <input type="email" class="form-control" id="Last Name"  placeholder="Last Name">
+          </div>
+
+          <div class="form-group">
+            <input type="email" class="form-control" [(ngModel)]="user.email"  placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="user.password" placeholder="Password">
+          </div>
+          <small> By clicking signup you agree to our <a href="">terms of use</a> and our <a href=""> Privacy policy</a></small>
+          <br>
+          <br>
+          <button type="submit" class="btn btn-primary btn-block"  (click)="AddUSer() ">SignUp</button>
+        </form>
+
       </div>
-    </div>
   </div>
+
+
   <div class="example-card" *ngIf="loggedIn===true">
     <div>
       <div><h2>Your Facebook Profile:</h2></div>
@@ -25,4 +53,6 @@
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
     </div>
   </div>
+
+  <!-- <img src="{{ user.photoUrl }}"> -->
 </div>
