@@ -5,13 +5,18 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { ApiPostService } from './api-post.service';
+import { FormControl, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
+  profileForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+});
+  Checkval:boolean;
     title = 'frontend-auth';
   user: SocialUser; 
   /* 
@@ -29,9 +34,11 @@ export class AppComponent implements OnInit {
     }
     data returned from the fb graph api
   */
- signupUser: any;
+ signupUser:Users;
+
+ httpResponse: Response;
   loggedIn: boolean;
-  constructor(private authService: AuthService,private apiService: ApiPostService) { }
+  constructor(private authService: AuthService,public http: HttpClient) { }
   
 
   ngOnInit() {
@@ -54,9 +61,25 @@ export class AppComponent implements OnInit {
   }
 
   AddUSer() {
-    this.apiService.createUsers(this.signupUser).subscribe((res)=>{
+    
+    let data = {
+      "email":this.profileForm.value.firstName,
+      "password": this.profileForm.value.lastName
+    }
+   var request=JSON.stringify(data);
+    fetch("https://reqres.in/api/register",{
+      headers:{ "Content-Type":"application/json"},
+      method: "POST",
+      body: request,
+    }).then(res=>res.json()).then(data => {
+      console.log(data);
+      if (data.token!="") {
+        this.Checkval = true;
+      }
+    })
 
-    });
+    this.Checkval = true;
+
     }
 
 }

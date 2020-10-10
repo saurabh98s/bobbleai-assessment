@@ -13,7 +13,7 @@ export class ApiPostService {
   createUsers(user: Users) {
     return this.httpClient.post(`https://reqres.in/api/register`,user).
         pipe(
-           map((data: any) => {
+           map((data: Response) => {
              return data;
            }), catchError( error => {
              return throwError( 'Something went wrong!',error );
