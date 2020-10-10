@@ -6,50 +6,23 @@
 
 
 <div class="container">
-  <hr>
-
-  <div class="row d-flex justify-content-center">
-    <div class="col-sm-4 ">
-
-      <div class="card">
-        <article class="card-body">
-          <a href="" class="float-right btn btn-outline-primary">Sign in</a>
-          <h4 class="card-title mb-4 mt-1">Sign up</h4>
-          <p>
-            <a href="" class="btn btn-block btn-outline-info"> <i class="fab fa-twitter"></i>   Login via Google</a>
-            <a href="" class="btn btn-block btn-outline-primary"> <i class="fab fa-facebook-f"></i>   Login via
-              facebook</a>
-          </p>
-          <hr>
-          <form>
-            <div class="form-group">
-              <input name="" class="form-control" placeholder="First Name" type="input">
-            </div>
-
-            <div class="form-group">
-              <input name="" class="form-control" placeholder="Email or login" type="email">
-            </div> <!-- form-group// -->
-            <div class="form-group">
-              <input class="form-control" placeholder="******" type="password">
-            </div> <!-- form-group// -->
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <button type="submit" class="btn btn-primary btn-block"> Login </button>
-                </div> <!-- form-group// -->
-              </div>
-              <div class="col-md-6 text-right">
-                <a class="small" href="#">Forgot password?</a>
-              </div>
-            </div> <!-- .row// -->
-          </form>
-        </article>
-      </div> <!-- card.// -->
-
-    </div> <!-- col.// --> <!-- col.// -->
-  </div> <!-- row.// -->
-
+  <div class="example-card">
+    <div class="card-header">
+      <div class="title"><h2>Welcome <span *ngIf="loggedIn===true">{{user.firstName}} {{user.lastName}}, </span> to Angular 8 Application</h2></div>
+      <div>
+        <button type="button" (click)="signInWithFB()" *ngIf="loggedIn===false" mat-flat-button color="primary">Sign In With Facebook</button>
+        <button type="button" (click)="signOut()" *ngIf="loggedIn===true" mat-flat-button color="primary">Sign Out From Facebook</button>
+      </div>
+    </div>
+  </div>
+  <div class="example-card" *ngIf="loggedIn===true">
+    <div>
+      <div><h2>Your Facebook Profile:</h2></div>
+      <div>Full Name: {{user.firstName}} {{user.lastName}}</div>
+    </div>
+    <img mat-card-image [src]="user.photoUrl" alt="My Facebook Photo">
+    <div>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </div>
+  </div>
 </div>
-<!--container end.//-->
-
-<br><br><br>
